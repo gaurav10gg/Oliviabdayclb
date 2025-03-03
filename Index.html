@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Olivia!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff6b81, #ff4757);
+            font-family: 'Pacifico', cursive, sans-serif;
+            overflow: hidden;
+        }
+        .card-container {
+            position: relative;
+            width: 400px; /* Increased size */
+            height: 500px; /* Increased size */
+            perspective: 1000px;
+        }
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+        .card.open {
+            transform: rotateY(180deg);
+        }
+        .front, .inside {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .front {
+            background: white;
+            color: red;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            flex-direction: column;
+        }
+        .front span {
+            font-size: 50px;
+        }
+        .inside {
+            background: red;
+            color: white;
+            transform: rotateY(180deg);
+            flex-direction: column;
+            padding: 30px;
+            font-size: 32px;
+        }
+        .inside h2 {
+            font-size: 40px;
+        }
+        .inside p {
+            font-size: 30px;
+        }
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .floating-elements div {
+            position: absolute;
+            width: 30px; /* Increased size */
+            height: 30px; /* Increased size */
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatUp 2s ease-out forwards;
+        }
+        .flowers {
+            background: pink;
+        }
+        .hearts {
+            background: red;
+            width: 35px; /* Increased size */
+            height: 35px; /* Increased size */
+        }
+        .stars {
+            background: yellow;
+            width: 28px; /* Increased size */
+            height: 28px; /* Increased size */
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-300px) scale(2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card" id="birthdayCard">
+            <div class="front" onclick="openCard()">
+                <span>🎂🎈</span>
+                <p>Click Here Birthday Gurl 🎉</p>
+                <span>💖🎁</span>
+            </div>
+            <div class="inside">
+                <h2>Happy Birthday Olivia! 🎂</h2>
+                <p>Wishing you all the happiness and love in the world and you are 18, but make sure to not lose that inner child inside you—it makes you a lot more beautiful ❤️</p>
+                <p>May your day be filled with joy and laughter! 🌟</p>
+            </div>
+        </div>
+        <div class="floating-elements" id="floatingElements"></div>
+    </div>
+
+    <script>
+        function openCard() {
+            document.getElementById('birthdayCard').classList.add('open');
+            createFloatingElements('flowers', 30);
+            createFloatingElements('hearts', 20);
+            createFloatingElements('stars', 15);
+        }
+        function createFloatingElements(className, count) {
+            const container = document.getElementById('floatingElements');
+            const containerRect = container.getBoundingClientRect();
+            for (let i = 0; i < count; i++) {
+                let element = document.createElement('div');
+                element.classList.add(className);
+                element.style.left = Math.random() * containerRect.width + 'px';
+                element.style.top = containerRect.height + 'px';
+                container.appendChild(element);
+                setTimeout(() => element.remove(), 2000);
+            }
+        }
+    </script>
+</body>
+</html>
